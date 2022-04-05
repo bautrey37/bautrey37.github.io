@@ -21,3 +21,8 @@ ajax_get('https://api.thecatapi.com/v1/images/search?size=full', function(data) 
   var html = '<img src="' + data[0]["url"] + '">';
   document.getElementById("image").innerHTML = html;
 });
+
+ajax_get('https://api.thecatapi.com/v1/images/search?size=full', function(data) {
+  var html = '<img src="' + data[0]["url"] + '">';
+  document.getElementById("image2").innerHTML = html;
+});
