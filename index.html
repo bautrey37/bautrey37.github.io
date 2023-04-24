@@ -8,6 +8,25 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#fafafa">
   <script type="text/javascript" src="app.js" defer=true></script>
+  <script type="text/javascript">
+    const params = new URLSearchParams(window.location.search);
+
+    const getSrc = () => {
+      switch (params.get('env')) {
+        case 'beta':
+          return '//api.beta.salemove.com/salemove_integration.js';
+        case 'prod-us':
+          return '//api.salemove.com/salemove_integration.js';
+        case 'prod-eu':
+          return '//api.salemove.eu/salemove_integration.js';
+        default:
+          return '//api.beta.salemove.com/salemove_integration.js';
+      }
+    }
+    const script = document.createElement('script');
+    script.src = getSrc();
+    document.head.appendChild(script);
+  </script>
 </head>
 
 <body>
@@ -15,11 +34,14 @@
     <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience and security.</p>
   <![endif]-->
 
-  <h1>Welcome to Brandon's test site!</h1>
+  <h1>Welcome to Brandon's <span id="env">PROD </span> test site!</h1>
   <div id="image"></div>
   <div id="image2"></div>
 
-  <script async src="//api.beta.salemove.com/salemove_integration.js"></script>
+<script>
+  const env = new URLSearchParams(window.location.search).get('env');
+  document.querySelector('#env').innerHTML = env.charAt(0).toUpperCase() + env.slice(1);
+</script>
 </body>
 
 </html>
